@@ -14,26 +14,26 @@ public class PhoneBook {
     }
 
     void show(String name) {
+        String border = "===========================\n";
         boolean match = false;
-        String msg = "";
+        String output = "";
         for (String contact : phoneBook.keySet()) {
             if (contact.toLowerCase().contains(name)) {
-                msg += contact + ": " + phoneBook.get(contact) + "\n";
+                output += contact + ": " + phoneBook.get(contact) + "\n";
                 match = true;
             }
         }
         if (!match) {
-            msg = "Sorry couldn't find anyting containing " + name;
+            output = border + "Sorry couldn't find anyting containing " + name + "\n" + border;
         }
-        String border = "===========================\n";
-        System.out.println("Search Results for: " + name + "\n" + border + msg + border);
+        System.out.println("Search Results for: " + name + "\n" + border + output + border);
     }
 
     void showAll() {
-        String msg = "";
+        String output = "";
         for (String contact : phoneBook.keySet()) {
-            msg += contact + ": " + phoneBook.get(contact) + "\n";
+            output += contact + ": " + phoneBook.get(contact) + "\n";
         }
-        System.out.println(msg);
+        System.out.println(output);
     }
 }
