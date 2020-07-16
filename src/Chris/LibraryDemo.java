@@ -1,7 +1,5 @@
 package Chris;
 
-import java.util.HashMap;
-
 public class LibraryDemo {
     public static void main(String[] args) {
         Library lib = new Library();
@@ -10,9 +8,7 @@ public class LibraryDemo {
         lib.add(new Book("b3","R. C. Martin", "Clean Code - Refactoring, Patterns, Testen und Techniken für sauberen Code", "mitp", 1, 2009));
         lib.add(new Book("b4","R. Sedgewick, K. Wayne", "Computer Science: An Interdisciplinary Approach", "Addison Wesley", 1, 2016));
         lib.add(new Book("b5","R. Sedgewick, K. Wayne", "Algorithms", "Addison Wesley", 4, 2011));
-        HashMap<String, Book> altBookStorage = new HashMap<>();
-        lib.copyToAltStorage(altBookStorage);
-        LibraryUser lu = new LibraryUser(lib, altBookStorage);
+        LibraryUser lu = new LibraryUser(lib);
         lu.rent("b1");
         lu.rent("b1");
         lu.rent("b3");

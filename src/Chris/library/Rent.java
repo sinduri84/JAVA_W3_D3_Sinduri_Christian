@@ -14,6 +14,6 @@ public class Rent {
 
     @Override
     public String toString() {
-        return book.getTitle() + " by " + book.getAuthor() + "\n is due on : " + dueDate + "\n";
+        return book + "\nis due on : " + dueDate + "\n";
     }
 }

@@ -3,27 +3,16 @@ package Chris;
 import Chris.library.Rent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class LibraryUser {
-    ArrayList<Rent> rented = new ArrayList<>();
+    private final ArrayList<Rent> rented = new ArrayList<>();
     Library library;
-    HashMap<String, Book> altLibary;
-    LibraryUser(Library library, HashMap<String, Book> altLibary) {
+    LibraryUser(Library library) {
         this.library = library;
-        this.altLibary = altLibary;
     }
     void rent(String bookUID) {
-        if (library.isAvailable(bookUID)) {
-            rented.add(new Rent(altLibary.get(bookUID)));
-            library.rent(bookUID);
-        } else {
-            System.out.println( "Sorry\n" +
-                                "==========================\n" +
-                                altLibary.get(bookUID) +
-                                "\n==========================\n" +
-                                "is not available" +
-                                "\n==========================\n");
+        if (library.rent(bookUID)) {
+            rented.add(new Rent(library.getBook(bookUID)));
         }
     }
 

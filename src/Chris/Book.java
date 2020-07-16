@@ -23,9 +23,13 @@ public class Book {
         this.available = available;
     }
 
+    public String fullInfo() {
+        return title + "\nby " + author + "\n" + publisher + ", " + edition + ". Edition, " + year;
+    }
+
     @Override
     public String toString() {
-        return "\n" + title + "\nby " + author + "\n" + publisher + ", " + edition + ". Edition, " + year;
+        return title + " (" + edition + ". ed, " + year + ")" + " by " + author;
     }
 
     public String getAuthor() {

@@ -1,55 +1,47 @@
 package Chris;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Library {
-    private ArrayList<Book> library = new ArrayList<>();
-    private ArrayList<String> altLibary = new ArrayList<>();
+    private final HashMap<String, Book> library = new HashMap<>();
 
     void add(Book book) {
-        library.add(book);
+        library.put(book.getBookUID(), book);
+    }
+
+    boolean isValid(String bookUID) {
+        return library.containsKey(bookUID);
+    }
+
+    Book getBook(String bookUID) {
+        return library.get(bookUID);
     }
 
     boolean isAvailable(String bookUID) {
-        for (Book book : library) {
-            if (book.getBookUID().equals(bookUID)) {
-                return book.isAvailable();
-            }
+        if (isValid(bookUID)) {
+            return library.get(bookUID).isAvailable();
+        } else {
+            return false;
         }
-        return false;
     }
-    boolean isAvailable(String bookUID, HashMap<String, Book> alternativeStorage) {
-        for (String UID : altLibary) {
-            if (UID.equals(bookUID)) {
-                return alternativeStorage.get(UID).isAvailable();
+    boolean rent(String bookUID) {
+        if (isValid(bookUID)) {
+            if (isAvailable(bookUID)) {
+                library.get(bookUID).setAvailable(false);
+                System.out.println("You rented:\n" + getBook(bookUID) + "\n");
+                return true;
+            } else {
+                System.out.println("Sorry\n" + getBook(bookUID) + "\nis rented.\n");
+                return false;
             }
+        } else {
+            System.out.println("Book not found.\n");
+            return false;
         }
-        return false;
     }
 
-    void rent(String bookUID) {
-        for (Book book : library) {
-            if (book.getBookUID().equals(bookUID)) {
-                book.setAvailable(false);
-            }
-        }
-    }
     void bookReturn(String bookUID) {
-        for (Book book : library) {
-            if (book.getBookUID().equals(bookUID)) {
-                book.setAvailable(true);
-            }
-        }
-    }
-    void addAlt(Book book, HashMap<String, Book> alternativeStorage) {
-        altLibary.add(book.getBookUID());
-        alternativeStorage.put(book.getBookUID(), book);
-    }
-
-    void copyToAltStorage(HashMap<String, Book> alternativeStorage) {
-        for (Book book : library) {
-            addAlt(book, alternativeStorage);
-        }
+        library.get(bookUID).setAvailable(true);
+        System.out.println("Returned "+ getBook(bookUID));
     }
 }
